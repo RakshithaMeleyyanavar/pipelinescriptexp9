@@ -1,0 +1,32 @@
+Experiment 10: Jenkins Pipeline Visualization and Logs
+Tasks: View pipeline stages, analyze logs, debug failures.
+Outcome: CI troubleshooting skills.
+
+
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Compiling Java files..."
+                bat "javac BankService.java"
+            }
+        }
+
+        stage('Run') {
+            steps {
+                echo "Running program..."
+                bat "java BankService"
+            }
+        }
+    }
+}
