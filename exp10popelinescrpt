@@ -12,38 +12,39 @@ pipeline {
         stage('Clone') {
             steps {
                 echo "Cloning GitHub repository..."
-                git 'https://github.com/RakshithaMeleyyanavar/Bank_service.git'
+                git branch: 'main',
+                    url: 'https://github.com/RakshithaMeleyyanavar/Bank_service.git'
             }
         }
 
         stage('Workspace Check') {
             steps {
-                echo "Checking files in workspace..."
+                echo "Checking workspace files..."
                 bat 'dir'
             }
         }
 
-        stage('Build') {
+        stage('Compile') {
             steps {
-                echo "Compiling Java program..."
-                bat "javac BankService.java"
+                echo "Compiling all Java files..."
+                bat 'javac *.java'
             }
         }
 
         stage('Run') {
             steps {
-                echo "Executing Java program..."
-                bat "java BankService"
+                echo "Running Java program..."
+                bat 'java BankService'
             }
         }
     }
 
     post {
         success {
-            echo "Pipeline executed successfully "
+            echo "Pipeline SUCCESS ✅ All stages completed"
         }
         failure {
-            echo "Pipeline failed Check logs for errors"
+            echo "Pipeline FAILED ❌ Check file name, branch, or Java errors"
         }
     }
 }
